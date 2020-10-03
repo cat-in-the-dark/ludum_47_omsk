@@ -4,33 +4,41 @@
 #include "consts.h"
 
 void Player::Update() {
-  if (IsKeyPressed(KEY_A)) {
-    commands.emplace_back(std::make_unique<LeftCommand>(this));
-  }
-  if (IsKeyPressed(KEY_D)) {
-    commands.emplace_back(std::make_unique<RightCommand>(this));
-  }
+  if (!execute) {
+    if (IsKeyPressed(KEY_A)) {
+      commands.emplace_back(std::make_unique<LeftCommand>(this));
+    }
+    if (IsKeyPressed(KEY_D)) {
+      commands.emplace_back(std::make_unique<RightCommand>(this));
+    }
 
-  if (IsKeyPressed(KEY_W)) {
-    commands.emplace_back(std::make_unique<JumpCommand>(this));
-  }
+    if (IsKeyPressed(KEY_W)) {
+      commands.emplace_back(std::make_unique<JumpCommand>(this));
+    }
 
-  if (IsKeyPressed(KEY_Q)) {
-    commands.emplace_back(std::make_unique<JumpLeftCommand>(this));
-  }
-  if (IsKeyPressed(KEY_E)) {
-    commands.emplace_back(std::make_unique<JumpRightCommand>(this));
-  }
+    if (IsKeyPressed(KEY_Q)) {
+      commands.emplace_back(std::make_unique<JumpLeftCommand>(this));
+    }
+    if (IsKeyPressed(KEY_E)) {
+      commands.emplace_back(std::make_unique<JumpRightCommand>(this));
+    }
 
-  if (IsKeyPressed(KEY_ENTER) && !commands.empty()) {
-    TraceLog(LOG_INFO, "Execute");
-    execute = true;
+    if (IsKeyPressed(KEY_ENTER) && !commands.empty()) {
+      TraceLog(LOG_INFO, "Execute");
+      execute = true;
+    }
   }
 
   if (execute) {
-    auto go_next = commands.at(current_cmd_idx)->Apply();
-    if (go_next) {
-      current_cmd_idx = (current_cmd_idx + 1) % commands.size();
+    if (!go_next) {
+      go_next = commands.at(current_cmd_idx)->Apply();
+    } else {
+      cooler += GetFrameTime();
+      if (cooler >= cooldown) {
+        cooler = 0;
+        go_next = false;
+        current_cmd_idx = (current_cmd_idx + 1) % commands.size();
+      }
     }
   }
 }

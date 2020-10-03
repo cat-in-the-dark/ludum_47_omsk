@@ -28,6 +28,10 @@ class Player {
   bool isGrounded = true;
   bool isJumping = false;
 
+  bool go_next = false;
+  double cooler = 0;
+  const double cooldown = 0.2;
+
   Player(const Texture2D* texture, int x, int y);
 
   void Draw();
