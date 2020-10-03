@@ -7,6 +7,7 @@
 
 class Context {
   bool shouldRestart = false;
+
  public:
   std::unique_ptr<Assets> assets;
   SceneManager scene_manager{};

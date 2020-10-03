@@ -1,9 +1,10 @@
 #pragma once
 
+#include <raylib.h>
+
 #include <cmath>
 #include <memory>
 #include <vector>
-#include <raylib.h>
 
 #include "command.h"
 
@@ -12,9 +13,10 @@ class Player {
   size_t current_cmd_idx = 0;
   bool execute = false;
   const Texture2D* texture;
+
  public:
   const double time_to_apex = 0.5;
-  const double jump_height = 96+32;
+  const double jump_height = 96 + 32;
   const double g = (2 * jump_height) / (time_to_apex * time_to_apex);
   const double init_jump_velocity = -std::sqrt(2 * g * jump_height);
 

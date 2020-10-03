@@ -2,8 +2,8 @@
 
 #include <raylib.h>
 
-#include "player.h"
 #include "consts.h"
+#include "player.h"
 
 bool LeftCommand::Apply() {
   auto step = player->step_x * GetFrameTime();
@@ -36,7 +36,7 @@ bool RightCommand::Apply() {
   }
   return false;
 }
-JumpCommand::JumpCommand(Player* player): player(player) {
+JumpCommand::JumpCommand(Player* player) : player(player) {
   TraceLog(LOG_INFO, "JumpCommand");
 }
 bool JumpCommand::Apply() {

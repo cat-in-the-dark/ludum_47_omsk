@@ -1,8 +1,9 @@
 #pragma once
 
+#include <memory>
+
 #include "consts.h"
 #include "scene.h"
-#include <memory>
 
 class Player;
 class Level;

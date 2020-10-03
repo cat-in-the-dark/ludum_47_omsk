@@ -26,8 +26,9 @@ void Level::Put(Tile* tile) {
 void Level::Draw() {
   for (auto& el : tiles) {
     if (el) {
-//      DrawRectangle(ToRealX(GetTileX(el->GetX())), ToRealY(GetTileY(el->GetY())), TILE_WIDTH,
-//                    TILE_HEIGHT, GREEN);
+      //      DrawRectangle(ToRealX(GetTileX(el->GetX())), ToRealY(GetTileY(el->GetY())),
+      //      TILE_WIDTH,
+      //                    TILE_HEIGHT, GREEN);
       el->Draw();
     }
   }
