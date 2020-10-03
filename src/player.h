@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 
-class ICommand;
+#include "command.h"
 
 class Player {
   std::vector<std::unique_ptr<ICommand>> commands;
@@ -13,9 +13,9 @@ class Player {
 
  public:
   const double time_to_apex = 0.5;
-  const double jump_height = 96;
+  const double jump_height = 96+32;
   const double g = (2 * jump_height) / (time_to_apex * time_to_apex);
-  const double init_jump_velocity = -std::sqrt(2*g*jump_height);
+  const double init_jump_velocity = -std::sqrt(2 * g * jump_height);
 
   double x;
   double y;
@@ -28,5 +28,4 @@ class Player {
 
   void Draw();
   void Update();
-  ~Player();
 };

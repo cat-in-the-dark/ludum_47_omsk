@@ -47,4 +47,3 @@ void Player::Draw() {
 }
 
 Player::Player(int x, int y) : x(x), y(y) {}
-Player::~Player() {}

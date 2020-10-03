@@ -2,7 +2,12 @@
 
 #include <raylib.h>
 
+#include <utility>
+
 #include "consts.h"
+#include "level.h"
+#include "platform.h"
+#include "player.h"
 #include "scene_game.h"
 #include "scene_logo.h"
 
@@ -15,7 +20,19 @@ Context::Context() {
   assets = std::make_unique<Assets>();
 
   scene_manager.Register<SceneLogo>();
-  scene_manager.Register<SceneGame>();
+
+  {
+    // FIRST level
+    auto* level = new Level(WIDTH / TILE_WIDTH, HEIGHT / TILE_HEIGHT);
+
+    std::vector<std::pair<int, int>> tiles{{1, 1}, {2, 2}};
+
+    for (auto& el : tiles) {
+      level->Put(new Platform(&assets->platform_1, ToRealX(el.first), ToRealY(el.second)));
+    }
+
+    scene_manager.Register<SceneGame>(new Player(0, HEIGHT), level);
+  }
 }
 Context::~Context() {
   CloseWindow();

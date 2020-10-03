@@ -1,14 +1,20 @@
 #include "scene_game.h"
+
 #include "context.h"
+#include "level.h"
+#include "player.h"
 
 void SceneGame::Dispose() {}
 void SceneGame::Init() {}
 bool SceneGame::Update() {
-  player.Update();
-
+  level->Update();
+  player->Update();
   return false;
 }
 void SceneGame::Draw() {
   DrawTexture(GetContext()->assets->fon_7, 0, 0, WHITE);
-  player.Draw();
+  level->Draw();
+  player->Draw();
 }
+SceneGame::SceneGame(Player* player, Level* level)
+    : player(std::unique_ptr<Player>(player)), level(std::unique_ptr<Level>(level)) {}
