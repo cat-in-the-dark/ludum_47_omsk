@@ -6,10 +6,14 @@
 #include "tile.h"
 
 Tile* Level::Get(int x, int y) const {
-  auto x_idx = GetTileX(x);
-  auto y_idx = GetTileY(y);
-  auto idx = x_idx + y_idx * width;
-  return tiles.at(idx).get();
+  auto idx = x + y * width;
+  if (idx < 0 || idx >= static_cast<int>(tiles.size())) {
+    return nullptr;
+  }
+  if (tiles.at(idx)) {
+    return tiles.at(idx).get();
+  }
+  return nullptr;
 }
 Level::Level(int width, int height) : tiles(height * width), width(width), height(height) {}
 void Level::Put(Tile* tile) {

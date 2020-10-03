@@ -3,6 +3,7 @@
 #include <cmath>
 #include <memory>
 #include <vector>
+#include <raylib.h>
 
 #include "command.h"
 
@@ -10,7 +11,7 @@ class Player {
   std::vector<std::unique_ptr<ICommand>> commands;
   size_t current_cmd_idx = 0;
   bool execute = false;
-
+  const Texture2D* texture;
  public:
   const double time_to_apex = 0.5;
   const double jump_height = 96+32;
@@ -24,7 +25,7 @@ class Player {
   double velocity_y = 0;
   bool isGrounded = true;
 
-  Player(int x, int y);
+  Player(const Texture2D* texture, int x, int y);
 
   void Draw();
   void Update();

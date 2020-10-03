@@ -3,12 +3,15 @@
 #include <raylib.h>
 
 #include "player.h"
+#include "consts.h"
+
 bool LeftCommand::Apply() {
   auto step = player->step_x * GetFrameTime();
   player->x -= step;
   distance += step;
   if (distance >= player->velocity_x) {
     distance = 0;
+    player->x = ToFixedPosX(player->x);
     TraceLog(LOG_INFO, "done LeftCommand");
     return true;
   }
@@ -27,6 +30,7 @@ bool RightCommand::Apply() {
   distance += step;
   if (distance >= player->velocity_x) {
     distance = 0;
+    player->x = ToFixedPosX(player->x);
     TraceLog(LOG_INFO, "done RightCommand");
     return true;
   }
@@ -39,6 +43,7 @@ bool JumpCommand::Apply() {
   if (isJumping) {
     if (player->isGrounded) {
       isJumping = false;
+      player->y = ToFixedPosY(player->y);
       TraceLog(LOG_INFO, "done JumpCommand");
       return true;
     }

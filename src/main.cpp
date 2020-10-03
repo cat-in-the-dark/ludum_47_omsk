@@ -1,5 +1,3 @@
-#include <raylib.h>
-
 #include "context.h"
 
 #if defined(PLATFORM_WEB)
@@ -10,16 +8,23 @@ void Update() {
   GetContext()->Update();
 }
 
-int main() {
+bool Run() {
   Context ctx;
   SetContext(&ctx);
 
 #if defined(PLATFORM_WEB)
   emscripten_set_main_loop(Update, 0, 1);
 #else
-  while (!WindowShouldClose()) {
+  while (!ctx.ShouldRestart()) {
     Update();
   }
 #endif
+  return !ctx.ShouldStop();
+}
+
+int main() {
+  while (Run()) {
+    ;
+  }
   return 0;
 }
