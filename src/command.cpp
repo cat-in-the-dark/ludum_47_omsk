@@ -44,6 +44,7 @@ bool JumpCommand::Apply() {
     if (player->isGrounded) {
       isJumping = false;
       player->y = ToFixedPosY(player->y);
+      player->velocity_y = 0;
       TraceLog(LOG_INFO, "done JumpCommand");
       return true;
     }
