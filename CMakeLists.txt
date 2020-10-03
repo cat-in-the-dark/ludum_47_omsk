@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.6)
 
-project(loopman CXX)
+project(loopman)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic -pedantic-errors -Wall -Werror -Wextra")
@@ -22,7 +22,7 @@ if (EMSCRIPTEN)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s WASM=1")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s ASSERTIONS=1")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --use-preload-plugins")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --embed-file ludum_46@/")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --embed-file assets@/")
     set(CMAKE_EXECUTABLE_SUFFIX ".js")
 
     file(COPY assets DESTINATION ${CMAKE_BINARY_DIR}/)
