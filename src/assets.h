@@ -7,7 +7,7 @@ class Assets {
   const Texture2D title;
   const Texture2D player;
   const Texture2D platform_1;
-  const Texture2D fon_7;
+  const Texture2D fon_10;
 
   Assets();
 };

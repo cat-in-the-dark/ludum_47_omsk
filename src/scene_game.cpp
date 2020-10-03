@@ -12,7 +12,7 @@ bool SceneGame::Update() {
   return false;
 }
 void SceneGame::Draw() {
-  DrawTexture(GetContext()->assets->fon_7, 0, 0, WHITE);
+  DrawTexture(GetContext()->assets->fon_10, 0, 0, WHITE);
   level->Draw();
   player->Draw();
 }
