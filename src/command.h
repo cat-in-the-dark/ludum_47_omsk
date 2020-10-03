@@ -23,3 +23,11 @@ class RightCommand : public ICommand {
   explicit RightCommand(Player* player);
   bool Apply() override;
 };
+
+class JumpCommand : public ICommand {
+  Player* player;
+  bool isJumping = false;
+ public:
+  explicit JumpCommand(Player* player);
+  bool Apply() override;
+};

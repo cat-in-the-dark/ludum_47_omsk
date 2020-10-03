@@ -32,3 +32,29 @@ bool RightCommand::Apply() {
   }
   return false;
 }
+JumpCommand::JumpCommand(Player* player): player(player) {
+  TraceLog(LOG_INFO, "JumpCommand");
+}
+bool JumpCommand::Apply() {
+  if (isJumping) {
+    if (player->isGrounded) {
+      isJumping = false;
+      TraceLog(LOG_INFO, "done JumpCommand");
+      return true;
+    }
+    return false;
+  }
+
+  if (!player->isGrounded) {
+    // cannot jump in this state
+    // go to the next state
+    TraceLog(LOG_INFO, "skip JumpCommand");
+    return true;
+  }
+
+  isJumping = true;
+  player->isGrounded = false;
+  player->velocity_y = player->init_jump_velocity;
+
+  return false;
+}
