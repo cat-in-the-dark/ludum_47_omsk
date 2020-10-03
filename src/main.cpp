@@ -1,4 +1,5 @@
 #include <raylib.h>
+
 #include "context.h"
 
 #if defined(PLATFORM_WEB)
