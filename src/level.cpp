@@ -37,3 +37,4 @@ void Level::Update() {
     }
   }
 }
+Level::~Level() {}

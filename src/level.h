@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 
-#include "tile.h"
+class Tile;
 
 class Level {
   std::vector<std::unique_ptr<Tile>> tiles;
@@ -17,4 +17,5 @@ class Level {
   void Put(Tile* tile);
   void Draw();
   void Update();
+  ~Level();
 };
