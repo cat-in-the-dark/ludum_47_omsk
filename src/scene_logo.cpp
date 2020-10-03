@@ -1,18 +1,23 @@
 #include "scene_logo.h"
 
-#include "context.h"
 #include <raylib.h>
 
+#include "context.h"
+
 void SceneLogo::Dispose() {}
-void SceneLogo::Init() {}
+void SceneLogo::Init() {
+  time = 0;
+}
 bool SceneLogo::Update() {
   time += GetFrameTime();
   if (time >= show_time) {
-    time = 0;
+    return true;
+  }
+  if (IsKeyPressed(KEY_SPACE)) {
     return true;
   }
   return false;
 }
 void SceneLogo::Draw() {
-  DrawTexture(GetContext()->assets->title, 0,0, WHITE);
+  DrawTexture(GetContext()->assets->title, 0, 0, WHITE);
 }

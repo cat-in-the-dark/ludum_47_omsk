@@ -7,8 +7,6 @@
 
 class Context {
  public:
-  const int width = 960;
-  const int height = 544;
   std::unique_ptr<Assets> assets;
   SceneManager scene_manager{};
 

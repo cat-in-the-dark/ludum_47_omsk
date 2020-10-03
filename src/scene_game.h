@@ -1,11 +1,11 @@
 #pragma once
 
 #include "consts.h"
+#include "player.h"
 #include "scene.h"
 
-class SceneLogo : public IScene {
-  double time = 0;
-  const double show_time = LOGO_SHOW_TIME;
+class SceneGame : public IScene {
+  Player player{4, HEIGHT - TILE_HEIGHT};
 
  public:
   void Dispose() override;

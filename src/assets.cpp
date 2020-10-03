@@ -2,6 +2,4 @@
 
 #include <raylib.h>
 
-Assets::Assets(): title(LoadTexture("title.png")) {
-
-}
+Assets::Assets() : title(LoadTexture("title.png")), player(LoadTexture("player.png")) {}
