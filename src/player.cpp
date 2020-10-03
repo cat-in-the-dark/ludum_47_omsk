@@ -32,3 +32,6 @@ void Player::Draw() {
 }
 
 Player::Player(const Texture2D* texture, int x, int y) : texture(texture), x(x), y(y) {}
+double Player::GetMiddleX() const {
+  return x + texture->width / 2.0;
+}

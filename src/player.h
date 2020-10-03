@@ -31,4 +31,6 @@ class Player {
 
   void Draw();
   void Update();
+
+  double GetMiddleX() const;
 };

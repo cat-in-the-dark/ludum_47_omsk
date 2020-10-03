@@ -1,14 +1,18 @@
 #include "platform.h"
+
+#include "consts.h"
+
 void Platform::Draw() {
-  DrawTexture(*texture, static_cast<int>(x), static_cast<int>(y), WHITE);
+  DrawTextureRec(*texture, rec, pos, WHITE);
 }
 void Platform::Update() {}
-Platform::Platform(const Texture2D* texture, int x, int y) : texture(texture), x(x), y(y) {}
+Platform::Platform(const Texture2D* texture, float x, float y, int texture_idx)
+    : texture(texture), pos({x, y}), rec({ToFloat(texture_idx * TILE_WIDTH), 0, TILE_WIDTH, TILE_HEIGHT}) {}
 int Platform::GetX() const {
-  return x;
+  return ToInt(pos.x);
 }
 int Platform::GetY() const {
-  return y;
+  return ToInt(pos.y);
 }
 bool Platform::IsCollidable() const {
   return is_collidable;

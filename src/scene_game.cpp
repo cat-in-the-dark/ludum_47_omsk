@@ -10,14 +10,17 @@ void ApplyGravity(Player* player, Level* level) {
     player->y += player->velocity_y * GetFrameTime();
     // TODO(ilya): check hit the platform
   }
-  if (player->y >= HEIGHT) {
-    player->isGrounded = true;
-    player->y = HEIGHT;
-  }
-  auto* tile = level->Get(GetTileX(player->x), GetTileY(player->y));
+  auto* tile = level->Get(ToTileX(player->GetMiddleX()), ToTileY(player->y));
   if (tile != nullptr) {
     player->isGrounded = true;
     //      TraceLog(LOG_INFO, "x=%d y=%d %b", tile->GetX(), tile->GetY(), tile->IsCollidable());
+  } else {
+    if (player->y >= HEIGHT) {
+      player->isGrounded = true;
+      player->y = HEIGHT;
+    } else {
+      player->isGrounded = false;
+    }
   }
 }
 

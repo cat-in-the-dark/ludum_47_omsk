@@ -2,10 +2,10 @@
 
 #include <cmath>
 
-int GetTileX(double x) {
+int ToTileX(double x) {
   return ToInt(x / TILE_WIDTH);
 }
-int GetTileY(double y) {
+int ToTileY(double y) {
   return ToInt((HEIGHT - y) / TILE_HEIGHT);
 }
 int ToRealX(int tileX) {
@@ -18,8 +18,11 @@ int ToInt(double v) {
   return static_cast<int>(std::round(v));
 }
 int ToFixedPosX(double x) {
-  return ToRealX(GetTileX(x));
+  return ToRealX(ToTileX(x));
 }
 int ToFixedPosY(double y) {
-  return ToRealY(GetTileY(y));
+  return ToRealY(ToTileY(y));
+}
+float ToFloat(int v) {
+  return static_cast<float>(v);
 }

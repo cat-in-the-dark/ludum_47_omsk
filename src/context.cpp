@@ -25,10 +25,19 @@ Context::Context() {
     // FIRST level
     auto* level = new Level(WIDTH / TILE_WIDTH, HEIGHT / TILE_HEIGHT);
 
-    std::vector<std::pair<int, int>> tiles{{1, 4}, {2, 8}};
+    std::vector<std::tuple<int, int, int>> tiles{
+        {4, 4, 0},
+        {5, 4, 1},
+        {6, 4, 2},
+        {7, 4, 3},
+        {8, 8, 0},
+        {9, 8, 1},
+        {10, 8, 2},
+        {11, 8, 3},
+    };
 
     for (auto& el : tiles) {
-      level->Put(new Platform(&assets->platform_1, ToRealX(el.first), ToRealY(el.second)));
+      level->Put(new Platform(&assets->platform_1, ToRealX(std::get<0>(el)), ToRealY(std::get<1>(el)), std::get<2>(el)));
     }
 
     scene_manager.Register<SceneGame>(new Player(&(assets->player), 0, HEIGHT), level);
