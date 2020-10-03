@@ -3,6 +3,7 @@
 #include "context.h"
 #include "level.h"
 #include "player.h"
+#include "tile.h"
 
 void ApplyGravity(Player* player, Level* level) {
   if (!player->isGrounded) {
@@ -11,9 +12,9 @@ void ApplyGravity(Player* player, Level* level) {
     // TODO(ilya): check hit the platform
   }
   auto* tile = level->Get(ToTileX(player->GetMiddleX()), ToTileY(player->y));
-  if (tile != nullptr) {
+  if (tile != nullptr && tile->IsCollidable()) {
     player->isGrounded = true;
-    //      TraceLog(LOG_INFO, "x=%d y=%d %b", tile->GetX(), tile->GetY(), tile->IsCollidable());
+//    TraceLog(LOG_INFO, "touch down %d %d", ToTileX(player->GetMiddleX()), ToTileY(player->y));
   } else {
     if (player->y >= HEIGHT) {
       player->isGrounded = true;

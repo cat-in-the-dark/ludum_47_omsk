@@ -15,7 +15,15 @@ void Player::Update() {
     commands.emplace_back(std::make_unique<JumpCommand>(this));
   }
 
+  if (IsKeyPressed(KEY_Q)) {
+    commands.emplace_back(std::make_unique<JumpLeftCommand>(this));
+  }
+  if (IsKeyPressed(KEY_E)) {
+    commands.emplace_back(std::make_unique<JumpRightCommand>(this));
+  }
+
   if (IsKeyPressed(KEY_ENTER) && !commands.empty()) {
+    TraceLog(LOG_INFO, "Execute");
     execute = true;
   }
 

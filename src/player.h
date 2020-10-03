@@ -26,6 +26,7 @@ class Player {
   double velocity_x = 96;
   double velocity_y = 0;
   bool isGrounded = true;
+  bool isJumping = false;
 
   Player(const Texture2D* texture, int x, int y);
 

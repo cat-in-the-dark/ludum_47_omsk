@@ -40,9 +40,9 @@ JumpCommand::JumpCommand(Player* player) : player(player) {
   TraceLog(LOG_INFO, "JumpCommand");
 }
 bool JumpCommand::Apply() {
-  if (isJumping) {
+  if (player->isJumping) {
     if (player->isGrounded) {
-      isJumping = false;
+      player->isJumping = false;
       player->y = ToFixedPosY(player->y);
       player->velocity_y = 0;
       TraceLog(LOG_INFO, "done JumpCommand");
@@ -55,12 +55,44 @@ bool JumpCommand::Apply() {
     // cannot jump in this state
     // go to the next state
     TraceLog(LOG_INFO, "skip JumpCommand");
-    return true;
+    return false;
   }
 
-  isJumping = true;
+  player->isJumping = true;
   player->isGrounded = false;
   player->velocity_y = player->init_jump_velocity;
 
+  return false;
+}
+bool JumpLeftCommand::Apply() {
+  if (!complete_jump) {
+    complete_jump = jump.Apply();
+  }
+  if (!complete_left) {
+    complete_left = left.Apply();
+  }
+  if (complete_jump && complete_left) {
+    TraceLog(LOG_INFO, "done JumpLeftCommand");
+    complete_jump = false;
+    complete_left = false;
+    return true;
+  }
+  return false;
+}
+JumpLeftCommand::JumpLeftCommand(Player* player): jump(player), left(player) {}
+JumpRightCommand::JumpRightCommand(Player* player): jump(player), right(player) {}
+bool JumpRightCommand::Apply() {
+  if (!complete_jump) {
+    complete_jump = jump.Apply();
+  }
+  if (!complete_right) {
+    complete_right = right.Apply();
+  }
+  if (complete_jump && complete_right) {
+    TraceLog(LOG_INFO, "done JumpRightCommand");
+    complete_right = false;
+    complete_jump = false;
+    return true;
+  }
   return false;
 }
