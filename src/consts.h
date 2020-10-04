@@ -12,6 +12,8 @@ constexpr int BIG_TILE_WIDTH = 96;
 constexpr int BIG_TILE_HEIGHT = 96;
 constexpr int UI_HEIGHT = HEIGHT;
 constexpr int UI_WIDTH = TILE_WIDTH * 10;
+constexpr int GAME_WIDTH = WIDTH - UI_WIDTH;
+constexpr int GAME_HEIGHT = HEIGHT;
 
 constexpr int UI_INSTRUCTIONS_Y = 0;
 constexpr int UI_RESOURCES_Y = HEIGHT - TILE_HEIGHT * 8;

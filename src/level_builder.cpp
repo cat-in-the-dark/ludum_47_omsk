@@ -9,7 +9,7 @@
 #include "platform.h"
 
 Level* Level1(const Assets* assets) {
-  auto* level = new Level(WIDTH / TILE_WIDTH, HEIGHT / TILE_HEIGHT);
+  auto* level = new Level(GAME_WIDTH / TILE_WIDTH, GAME_HEIGHT / TILE_HEIGHT);
 
   std::vector<std::tuple<int, int, int>> tiles{
       {4, 4, 0}, {5, 4, 1}, {6, 4, 2}, {7, 4, 3}, {8, 8, 0}, {9, 8, 1}, {10, 8, 2}, {11, 8, 3}, {4, 8, 0}, {5, 8, 1}, {6, 8, 2}, {7, 8, 3},
