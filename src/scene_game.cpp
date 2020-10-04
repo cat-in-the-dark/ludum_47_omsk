@@ -1,5 +1,6 @@
 #include "scene_game.h"
 
+#include "consts.h"
 #include "context.h"
 #include "level.h"
 #include "player.h"
@@ -15,7 +16,7 @@ void ApplyGravity(Player* player, Level* level) {
   auto* tile = level->Get(ToTileX(player->GetMiddleX()), ToTileY(player->y));
   if (tile != nullptr && tile->IsCollidable()) {
     player->isGrounded = true;
-//    TraceLog(LOG_INFO, "touch down %d %d", ToTileX(player->GetMiddleX()), ToTileY(player->y));
+    //    TraceLog(LOG_INFO, "touch down %d %d", ToTileX(player->GetMiddleX()), ToTileY(player->y));
   } else {
     if (player->y >= HEIGHT) {
       player->isGrounded = true;
@@ -45,9 +46,12 @@ void SceneGame::Draw() {
   EndShaderMode();
 }
 SceneGame::SceneGame(Player* player, Level* level, UI* ui)
-    : player(std::unique_ptr<Player>(player)), level(std::unique_ptr<Level>(level)), ui(std::unique_ptr<UI>(ui)) {
+    : player(std::unique_ptr<Player>(player)),
+      level(std::unique_ptr<Level>(level)),
+      ui(std::unique_ptr<UI>(ui)) {
   ui->SetParent(this);
-  shader = LoadShader(nullptr, "crt_shader.shader");
+
+  shader = LoadShader(nullptr, TextFormat("crt_shader_%i.shader", GLSL_VERSION));
 }
 Player* SceneGame::GetPlayer() {
   return player.get();

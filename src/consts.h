@@ -2,6 +2,12 @@
 
 #include <raylib.h>
 
+#if defined(PLATFORM_DESKTOP)
+#define GLSL_VERSION            330
+#else   // PLATFORM_RPI, PLATFORM_ANDROID, PLATFORM_WEB
+#define GLSL_VERSION            100
+#endif
+
 constexpr double LOGO_SHOW_TIME = 0.1;
 
 constexpr int WIDTH = 960;
