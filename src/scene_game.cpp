@@ -37,15 +37,21 @@ bool SceneGame::Update() {
   return false;
 }
 void SceneGame::Draw() {
+  BeginShaderMode(shader);
   DrawTexture(GetContext()->assets->fon_10, 0, 0, WHITE);
   level->Draw();
   player->Draw();
   ui->Draw();
+  EndShaderMode();
 }
 SceneGame::SceneGame(Player* player, Level* level, UI* ui)
     : player(std::unique_ptr<Player>(player)), level(std::unique_ptr<Level>(level)), ui(std::unique_ptr<UI>(ui)) {
   ui->SetParent(this);
+  shader = LoadShader(nullptr, "crt_shader.shader");
 }
 Player* SceneGame::GetPlayer() {
   return player.get();
+}
+SceneGame::~SceneGame() {
+  UnloadShader(shader);
 }

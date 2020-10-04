@@ -19,7 +19,7 @@ Context::Context() {
 
   scene_manager.Register<SceneLogo>();
 
-  auto* ui = new UI(UI_WIDTH, UI_HEIGHT, WIDTH - UI_WIDTH, 0);
+  auto* ui = new UI(UI_WIDTH, UI_HEIGHT, GAME_WIDTH, 0);
 
   {
     scene_manager.Register<SceneGame>(
