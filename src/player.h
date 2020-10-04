@@ -29,6 +29,8 @@ class Player {
 
   float x;
   float y;
+  const float width = BIG_TILE_WIDTH;
+  const float height = BIG_TILE_HEIGHT;
   float step_x = BIG_TILE_WIDTH;
   float velocity_x = BIG_TILE_WIDTH;
   float velocity_y = 0;
@@ -53,4 +55,5 @@ class Player {
   [[nodiscard]] const std::vector<std::unique_ptr<ICommand>>& GetCommands() const;
   [[nodiscard]] size_t GetCurrentCmdIdx() const;
   [[nodiscard]] bool IsExecuting() const;
+  [[nodiscard]] Rectangle GetRec() const;
 };

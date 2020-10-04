@@ -9,6 +9,7 @@ class Assets {
   const Texture2D title;
   const Texture2D art;
   const Texture2D player;
+  const Texture2D portal;
   const Texture2D platform_1;
   const Texture2D fon_10;
   const Texture2D player_run;
@@ -16,6 +17,7 @@ class Assets {
   const Texture2D player_jump;
   const Texture2D player_attack;
 
+  Animation portal_anim;
   Animation player_run_right_anim;
   Animation player_run_left_anim;
   Animation player_idle_anim;

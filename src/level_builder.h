@@ -4,4 +4,4 @@
 
 class Assets;
 
-Level* Level1(const Assets* assets);
+Level* Level1(Assets* assets);

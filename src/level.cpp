@@ -2,7 +2,12 @@
 
 #include <raylib.h>
 
+#include <memory>
+
 #include "consts.h"
+#include "player.h"
+#include "portal.h"
+#include "scene_game.h"
 #include "tile.h"
 
 Tile* Level::Get(int x, int y) const {
@@ -29,6 +34,12 @@ void Level::Draw() {
       el->Draw();
     }
   }
+  if (portal_) {
+    portal_->Draw();
+  }
+
+//  DrawRectangleRec(parent_->GetPlayer()->GetRec(), GREEN);
+//  DrawRectangleRec(portal_->GetRec(), RED);
 }
 void Level::Update() {
   for (auto& el : tiles) {
@@ -36,5 +47,20 @@ void Level::Update() {
       el->Update();
     }
   }
+  if (portal_) {
+    portal_->Update();
+  }
+  auto plbbox = parent_->GetPlayer()->GetRec();
+  auto pobbxo = portal_->GetRec();
+  auto collision = CheckCollisionRecs(pobbxo, plbbox);
+  if (collision) {
+    parent_->SetWin();
+  }
 }
-Level::~Level() {}
+Level::~Level() = default;
+void Level::SetPortal(Portal* portal) {
+  portal_.reset(portal);
+}
+void Level::SetParent(SceneGame* parent) {
+  parent_ = parent;
+}

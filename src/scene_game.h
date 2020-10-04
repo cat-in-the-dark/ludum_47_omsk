@@ -15,6 +15,7 @@ class SceneGame : public IScene {
   std::unique_ptr<UI> ui;
 
   Shader shader;
+  bool win = false;
 
  public:
   SceneGame(Player* player, Level* level, UI* ui);
@@ -23,5 +24,6 @@ class SceneGame : public IScene {
   bool Update() override;
   void Draw() override;
   Player* GetPlayer();
+  void SetWin();
   ~SceneGame();
 };

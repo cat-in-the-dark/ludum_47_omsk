@@ -99,3 +99,8 @@ size_t Player::GetCurrentCmdIdx() const {
 bool Player::IsExecuting() const {
   return execute;
 }
+Rectangle Player::GetRec() const {
+  auto w = static_cast<float>(width) / 2;
+  auto h = static_cast<float>(height) / 2;
+  return Rectangle{x + ToFloat(width) / 2 - w / 2, y - ToFloat(height) / 2 - h / 2, w, h};
+}

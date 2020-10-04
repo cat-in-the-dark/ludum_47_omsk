@@ -28,9 +28,12 @@ void ApplyGravity(Player* player, Level* level) {
 }
 
 void SceneGame::Dispose() {}
-void SceneGame::Init() {}
+void SceneGame::Init() {
+  win = false;
+}
 bool SceneGame::Update() {
   //  TraceLog(LOG_INFO, "x=%f y=%f", player->x, player->y);
+  if (win) return false;
   ApplyGravity(player.get(), level.get());
   level->Update();
   player->Update();
@@ -50,6 +53,7 @@ SceneGame::SceneGame(Player* player, Level* level, UI* ui)
       level(std::unique_ptr<Level>(level)),
       ui(std::unique_ptr<UI>(ui)) {
   ui->SetParent(this);
+  level->SetParent(this);
 
   shader = LoadShader(nullptr, TextFormat("crt_shader_%i.shader", GLSL_VERSION));
 }
@@ -58,4 +62,8 @@ Player* SceneGame::GetPlayer() {
 }
 SceneGame::~SceneGame() {
   UnloadShader(shader);
+}
+void SceneGame::SetWin() {
+  win = true;
+  TraceLog(LOG_INFO, "WIN");
 }
