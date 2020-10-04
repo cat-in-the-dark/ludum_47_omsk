@@ -15,7 +15,8 @@ class Player {
   size_t current_cmd_idx = 0;
   bool execute = false;
 
-  Animation* const anim_run;
+  Animation* const anim_run_left;
+  Animation* const anim_run_right;
   Animation* const anim_idle;
   Animation* const anim_jump;
 
@@ -33,12 +34,13 @@ class Player {
   bool isGrounded = true;
   bool isJumping = false;
   bool is_idle = true;
+  int direction = 0;
   bool is_running = false;
   bool go_next = false;
   float cooler = 0;
   const float cooldown = 0.2;
 
-  Player(Animation* anim_run, Animation* anim_idle, Animation* anim_jump, float x, float y);
+  Player(Animation* anim_run_left, Animation* anim_run_right, Animation* anim_idle, Animation* anim_jump, float x, float y);
 
   void Draw();
   void Update();

@@ -14,7 +14,8 @@ class Assets {
   const Texture2D player_idle;
   const Texture2D player_jump;
 
-  Animation player_run_anim;
+  Animation player_run_right_anim;
+  Animation player_run_left_anim;
   Animation player_idle_anim;
   Animation player_jump_anim;
 

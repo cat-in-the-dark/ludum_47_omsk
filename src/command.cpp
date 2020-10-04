@@ -9,11 +9,13 @@ bool LeftCommand::Apply() {
   auto step = player->step_x * GetFrameTime();
   player->x -= step;
   distance += step;
+  player->direction = -1;
   player->is_running = true;
   if (distance >= player->velocity_x) {
     distance = 0;
     player->x = ToFixedPosX(player->x);
     player->is_running = false;
+    player->direction = 0;
     TraceLog(LOG_INFO, "done LeftCommand");
     return true;
   }
@@ -31,7 +33,9 @@ bool RightCommand::Apply() {
   player->x += step;
   distance += step;
   player->is_running = true;
+  player->direction = 1;
   if (distance >= player->velocity_x) {
+    player->direction = 0;
     player->is_running = false;
     distance = 0;
     player->x = ToFixedPosX(player->x);

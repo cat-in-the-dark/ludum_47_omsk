@@ -15,7 +15,7 @@ class Animation {
 
   bool cycled;
  public:
-  Animation(const Texture2D& texture, int width, int height, double frame_time, bool cycled);
+  Animation(const Texture2D& texture, int width, int height, double frame_time, bool cycled, bool horizontal_flip=false);
   void Draw(float x, float y, Color tint = WHITE);
   void Reset();
   bool IsFinished() const;

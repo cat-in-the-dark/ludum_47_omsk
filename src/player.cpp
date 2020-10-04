@@ -47,7 +47,11 @@ void Player::Draw() {
   auto drawY = y - anim_idle->GetHeight();
 
   if (is_running) {
-    anim_run->Draw(x, drawY);
+    if (direction == -1) {
+      anim_run_left->Draw(x, drawY);
+    } else {
+      anim_run_right->Draw(x, drawY);
+    }
   } else if (isJumping) {
     anim_jump->Draw(x, drawY);
   } else {
@@ -62,8 +66,14 @@ void Player::Draw() {
 float Player::GetMiddleX() const {
   return x + anim_idle->GetWidth() / 2.0F;
 }
-Player::Player(Animation* anim_run, Animation* anim_idle, Animation* anim_jump, float x, float y)
-    : anim_run(anim_run), anim_idle(anim_idle), anim_jump(anim_jump), x(x), y(y) {}
+Player::Player(Animation* anim_run_left, Animation* anim_run_right, Animation* anim_idle,
+               Animation* anim_jump, float x, float y)
+    : anim_run_left(anim_run_left),
+      anim_run_right(anim_run_right),
+      anim_idle(anim_idle),
+      anim_jump(anim_jump),
+      x(x),
+      y(y) {}
 const std::vector<std::unique_ptr<ICommand>>& Player::GetCommands() const {
   return commands;
 }
