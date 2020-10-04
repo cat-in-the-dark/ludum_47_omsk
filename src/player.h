@@ -14,13 +14,14 @@ class Player {
   std::vector<std::unique_ptr<ICommand>> commands;
   size_t current_cmd_idx = 0;
   bool execute = false;
-
+ public:
+  Animation* const anim_attack_left;
+  Animation* const anim_attack_right;
   Animation* const anim_run_left;
   Animation* const anim_run_right;
   Animation* const anim_idle;
   Animation* const anim_jump;
 
- public:
   const float time_to_apex = 0.5;
   const float jump_height = BIG_TILE_HEIGHT + TILE_HEIGHT * 1.5;
   const float g = (2 * jump_height) / (time_to_apex * time_to_apex);
@@ -34,13 +35,15 @@ class Player {
   bool isGrounded = true;
   bool isJumping = false;
   bool is_idle = true;
-  int direction = 0;
+  bool is_attacking = false;
+  int direction = 1;
   bool is_running = false;
   bool go_next = false;
   float cooler = 0;
   const float cooldown = 0.2;
 
-  Player(Animation* anim_run_left, Animation* anim_run_right, Animation* anim_idle, Animation* anim_jump, float x, float y);
+  Player(Animation* anim_attack_left, Animation* anim_attack_right, Animation* anim_run_left,
+         Animation* anim_run_right, Animation* anim_idle, Animation* anim_jump, float x, float y);
 
   void Draw();
   void Update();
@@ -48,6 +51,6 @@ class Player {
   [[nodiscard]] float GetMiddleX() const;
 
   [[nodiscard]] const std::vector<std::unique_ptr<ICommand>>& GetCommands() const;
-  size_t GetCurrentCmdIdx() const;
-  bool IsExecuting() const;
+  [[nodiscard]] size_t GetCurrentCmdIdx() const;
+  [[nodiscard]] bool IsExecuting() const;
 };

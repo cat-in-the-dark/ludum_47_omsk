@@ -22,6 +22,9 @@ void Player::Update() {
     if (IsKeyPressed(KEY_E)) {
       commands.emplace_back(std::make_unique<JumpRightCommand>(this));
     }
+    if (IsKeyPressed(KEY_X)) {
+      commands.emplace_back(std::make_unique<AttackCommand>(this));
+    }
 
     if (IsKeyPressed(KEY_ENTER) && !commands.empty()) {
       TraceLog(LOG_INFO, "Execute");
@@ -44,7 +47,7 @@ void Player::Update() {
 }
 
 void Player::Draw() {
-  auto drawY = y - anim_idle->GetHeight();
+  auto drawY = y - ToFloat(anim_idle->GetHeight());
 
   if (is_running) {
     if (direction == -1) {
@@ -54,6 +57,12 @@ void Player::Draw() {
     }
   } else if (isJumping) {
     anim_jump->Draw(x, drawY);
+  } else if (is_attacking) {
+    if (direction == -1) {
+      anim_attack_left->Draw(x, drawY);
+    } else {
+      anim_attack_right->Draw(x, drawY);
+    }
   } else {
     anim_idle->Draw(x, drawY);
   }
@@ -61,14 +70,21 @@ void Player::Draw() {
   if (!isJumping) {
     anim_jump->Reset();
   }
+  if (!is_attacking) {
+    anim_attack_right->Reset();
+    anim_attack_left->Reset();
+  }
 }
 
 float Player::GetMiddleX() const {
   return x + anim_idle->GetWidth() / 2.0F;
 }
-Player::Player(Animation* anim_run_left, Animation* anim_run_right, Animation* anim_idle,
-               Animation* anim_jump, float x, float y)
-    : anim_run_left(anim_run_left),
+Player::Player(Animation* anim_attack_left, Animation* anim_attack_right, Animation* anim_run_left,
+               Animation* anim_run_right, Animation* anim_idle, Animation* anim_jump, float x,
+               float y)
+    : anim_attack_left(anim_attack_left),
+      anim_attack_right(anim_attack_right),
+      anim_run_left(anim_run_left),
       anim_run_right(anim_run_right),
       anim_idle(anim_idle),
       anim_jump(anim_jump),

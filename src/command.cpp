@@ -15,7 +15,6 @@ bool LeftCommand::Apply() {
     distance = 0;
     player->x = ToFixedPosX(player->x);
     player->is_running = false;
-    player->direction = 0;
     TraceLog(LOG_INFO, "done LeftCommand");
     return true;
   }
@@ -35,7 +34,6 @@ bool RightCommand::Apply() {
   player->is_running = true;
   player->direction = 1;
   if (distance >= player->velocity_x) {
-    player->direction = 0;
     player->is_running = false;
     distance = 0;
     player->x = ToFixedPosX(player->x);
@@ -102,5 +100,21 @@ bool JumpRightCommand::Apply() {
     complete_jump = false;
     return true;
   }
+  return false;
+}
+AttackCommand::AttackCommand(Player* player) : player(player) {}
+bool AttackCommand::Apply() {
+  if (player->is_attacking) {
+    if (player->direction == 1 && player->anim_attack_right->IsFinished()) {
+      player->is_attacking = false;
+      return true;
+    }
+    if (player->direction == -1 && player->anim_attack_left->IsFinished()) {
+      player->is_attacking = false;
+      return true;
+    }
+    return false;
+  }
+  player->is_attacking = true;
   return false;
 }
