@@ -19,7 +19,7 @@ Context::Context() {
   scene_manager.Register<SceneLogo>();
 
   {
-    scene_manager.Register<SceneGame>(new Player(&(assets->player), 0, HEIGHT),
+    scene_manager.Register<SceneGame>(new Player(&(assets->player_run_anim), &(assets->player_idle_anim), &(assets->player_jump_anim), 0.0f, ToFloat(HEIGHT)),
                                       Level1(assets.get()));
   }
 }

@@ -44,10 +44,23 @@ void Player::Update() {
 }
 
 void Player::Draw() {
-  DrawTexture(*texture, ToInt(x), ToInt(y) - texture->height, WHITE);
+  auto drawY = y - anim_idle->GetHeight();
+
+  if (is_running) {
+    anim_run->Draw(x, drawY);
+  } else if (isJumping) {
+    anim_jump->Draw(x, drawY);
+  } else {
+    anim_idle->Draw(x, drawY);
+  }
+
+  if (!isJumping) {
+    anim_jump->Reset();
+  }
 }
 
-Player::Player(const Texture2D* texture, int x, int y) : texture(texture), x(x), y(y) {}
-double Player::GetMiddleX() const {
-  return x + texture->width / 2.0;
+float Player::GetMiddleX() const {
+  return x + anim_idle->GetWidth() / 2.0F;
 }
+Player::Player(Animation* anim_run, Animation* anim_idle, Animation* anim_jump, float x, float y)
+    : anim_run(anim_run), anim_idle(anim_idle), anim_jump(anim_jump), x(x), y(y) {}

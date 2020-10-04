@@ -6,6 +6,8 @@ constexpr int WIDTH = 960;
 constexpr int HEIGHT = 544;
 constexpr int TILE_HEIGHT = 24;
 constexpr int TILE_WIDTH = 24;
+constexpr int BIG_TILE_WIDTH = 96;
+constexpr int BIG_TILE_HEIGHT = 96;
 
 float ToFloat(int v);
 int ToFixedPosY(double x);

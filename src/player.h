@@ -6,36 +6,42 @@
 #include <memory>
 #include <vector>
 
+#include "animation.h"
 #include "command.h"
+#include "consts.h"
 
 class Player {
   std::vector<std::unique_ptr<ICommand>> commands;
   size_t current_cmd_idx = 0;
   bool execute = false;
-  const Texture2D* texture;
+
+  Animation* const anim_run;
+  Animation* const anim_idle;
+  Animation* const anim_jump;
 
  public:
-  const double time_to_apex = 0.5;
-  const double jump_height = 96 + 32;
-  const double g = (2 * jump_height) / (time_to_apex * time_to_apex);
-  const double init_jump_velocity = -std::sqrt(2 * g * jump_height);
+  const float time_to_apex = 0.5;
+  const float jump_height = BIG_TILE_HEIGHT + TILE_HEIGHT * 1.5;
+  const float g = (2 * jump_height) / (time_to_apex * time_to_apex);
+  const float init_jump_velocity = -std::sqrt(2 * g * jump_height);
 
-  double x;
-  double y;
-  double step_x = 96;
-  double velocity_x = 96;
-  double velocity_y = 0;
+  float x;
+  float y;
+  float step_x = BIG_TILE_WIDTH;
+  float velocity_x = BIG_TILE_WIDTH;
+  float velocity_y = 0;
   bool isGrounded = true;
   bool isJumping = false;
-
+  bool is_idle = true;
+  bool is_running = false;
   bool go_next = false;
-  double cooler = 0;
-  const double cooldown = 0.2;
+  float cooler = 0;
+  const float cooldown = 0.2;
 
-  Player(const Texture2D* texture, int x, int y);
+  Player(Animation* anim_run, Animation* anim_idle, Animation* anim_jump, float x, float y);
 
   void Draw();
   void Update();
 
-  double GetMiddleX() const;
+  float GetMiddleX() const;
 };

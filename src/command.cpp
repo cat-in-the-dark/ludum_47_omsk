@@ -9,9 +9,11 @@ bool LeftCommand::Apply() {
   auto step = player->step_x * GetFrameTime();
   player->x -= step;
   distance += step;
+  player->is_running = true;
   if (distance >= player->velocity_x) {
     distance = 0;
     player->x = ToFixedPosX(player->x);
+    player->is_running = false;
     TraceLog(LOG_INFO, "done LeftCommand");
     return true;
   }
@@ -28,7 +30,9 @@ bool RightCommand::Apply() {
   auto step = player->step_x * GetFrameTime();
   player->x += step;
   distance += step;
+  player->is_running = true;
   if (distance >= player->velocity_x) {
+    player->is_running = false;
     distance = 0;
     player->x = ToFixedPosX(player->x);
     TraceLog(LOG_INFO, "done RightCommand");
@@ -79,8 +83,8 @@ bool JumpLeftCommand::Apply() {
   }
   return false;
 }
-JumpLeftCommand::JumpLeftCommand(Player* player): jump(player), left(player) {}
-JumpRightCommand::JumpRightCommand(Player* player): jump(player), right(player) {}
+JumpLeftCommand::JumpLeftCommand(Player* player) : jump(player), left(player) {}
+JumpRightCommand::JumpRightCommand(Player* player) : jump(player), right(player) {}
 bool JumpRightCommand::Apply() {
   if (!complete_jump) {
     complete_jump = jump.Apply();
