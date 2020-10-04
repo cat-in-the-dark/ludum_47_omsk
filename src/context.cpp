@@ -7,6 +7,7 @@
 #include "player.h"
 #include "scene_game.h"
 #include "scene_logo.h"
+#include "scene_menu.h"
 #include "ui.h"
 
 Context::Context() {
@@ -18,6 +19,7 @@ Context::Context() {
   assets = std::make_unique<Assets>();
 
   scene_manager.Register<SceneLogo>();
+  scene_manager.Register<SceneMenu>();
 
   auto* ui = new UI(UI_WIDTH, UI_HEIGHT, GAME_WIDTH, 0);
 

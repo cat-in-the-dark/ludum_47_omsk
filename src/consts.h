@@ -8,7 +8,7 @@
 #define GLSL_VERSION            100
 #endif
 
-constexpr double LOGO_SHOW_TIME = 0.1;
+constexpr double LOGO_SHOW_TIME = 0.5;
 
 constexpr int WIDTH = 960;
 constexpr int HEIGHT = 544;
