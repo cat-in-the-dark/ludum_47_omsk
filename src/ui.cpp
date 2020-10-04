@@ -1,9 +1,21 @@
 #include "ui.h"
 
+#include <array>
+
 #include "consts.h"
 #include "context.h"
 #include "player.h"
 #include "scene_game.h"
+
+static std::array<const char*, 9> MAN_TEXT{"PRESS KEY TO ADD",
+                                           "INSTRUCTION",
+                                           "A - LEFT",
+                                           "D - RIGHT",
+                                           "W - JUMP",
+                                           "Q - JUMP LEFT",
+                                           "E - JUMP RIGHT",
+                                           "X - ATTACK",
+                                           "ENTER - EXECUTE"};
 
 int DrawTextInBox(int ty, int width, const char* text) {
   int height = BIG_FONT + 2;
@@ -30,7 +42,7 @@ void UI::Draw() {
   } else {
     blink_counter++;
     if (blink_counter >= no_blink_frames) {
-      if (blink_counter <= no_blink_frames*2) {
+      if (blink_counter <= no_blink_frames * 2) {
         auto idx = parent_->GetPlayer()->GetCommands().size();
         DrawRectangle(0, GetLineY(inst_height, idx), width, SMALL_FONT, COLOR_3);
       } else {
@@ -45,7 +57,10 @@ void UI::Draw() {
     i++;
   }
 
-  DrawTextInBox(UI_RESOURCES_Y, width, "RESOURCES");
+  auto res_height = DrawTextInBox(UI_RESOURCES_Y, width, "MAN PAGE");
+  for (size_t j = 0; j < MAN_TEXT.size(); j++) {
+    DrawText(MAN_TEXT.at(j), 6, j*SMALL_FONT + res_height + UI_RESOURCES_Y, SMALL_FONT, COLOR_9);
+  }
 
   DrawRectangleLinesEx({0, 0, ToFloat(width), ToFloat(height)}, 2, COLOR_9);
   EndTextureMode();

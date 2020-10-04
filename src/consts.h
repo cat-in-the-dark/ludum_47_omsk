@@ -24,7 +24,7 @@ constexpr int GAME_HEIGHT = HEIGHT;
 constexpr int UI_INSTRUCTIONS_Y = 0;
 constexpr int UI_RESOURCES_Y = HEIGHT - TILE_HEIGHT * 8;
 
-constexpr int SMALL_FONT = 20;
+constexpr int SMALL_FONT = 18;
 constexpr int BIG_FONT = 22;
 
 constexpr Color COLOR_3 = Color {95, 44, 131, 255};
