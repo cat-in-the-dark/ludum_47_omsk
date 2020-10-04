@@ -14,21 +14,40 @@ int DrawTextInBox(int ty, int width, const char* text) {
   return height;
 }
 
+int GetLineY(int offset_top, int n_line) {
+  return offset_top + 4 + n_line * SMALL_FONT;
+}
+
 void UI::Draw() {
   BeginTextureMode(target);
   ClearBackground(COLOR_15);
-  DrawRectangleLinesEx({0, 0, ToFloat(width), ToFloat(height)}, 2, COLOR_9);
 
   auto inst_height = DrawTextInBox(UI_INSTRUCTIONS_Y, width, "INSTRUCTIONS");
 
+  if (parent_->GetPlayer()->IsExecuting()) {
+    auto idx = parent_->GetPlayer()->GetCurrentCmdIdx();
+    DrawRectangle(0, GetLineY(inst_height, idx), width, SMALL_FONT, COLOR_3);
+  } else {
+    blink_counter++;
+    if (blink_counter >= no_blink_frames) {
+      if (blink_counter <= no_blink_frames*2) {
+        auto idx = parent_->GetPlayer()->GetCommands().size();
+        DrawRectangle(0, GetLineY(inst_height, idx), width, SMALL_FONT, COLOR_3);
+      } else {
+        blink_counter = 0;
+      }
+    }
+  }
+
   int i = 0;
   for (const auto& cmd : parent_->GetPlayer()->GetCommands()) {
-    DrawText(cmd->GetName().c_str(), 6, inst_height + 4 + i * SMALL_FONT, SMALL_FONT, COLOR_9);
+    DrawText(cmd->GetName().c_str(), 6, GetLineY(inst_height, i), SMALL_FONT, COLOR_9);
     i++;
   }
 
   DrawTextInBox(UI_RESOURCES_Y, width, "RESOURCES");
 
+  DrawRectangleLinesEx({0, 0, ToFloat(width), ToFloat(height)}, 2, COLOR_9);
   EndTextureMode();
   DrawTextureRec(target.texture,
                  {0, 0, ToFloat(target.texture.width), ToFloat(-target.texture.height)},

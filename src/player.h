@@ -45,5 +45,7 @@ class Player {
 
   [[nodiscard]] float GetMiddleX() const;
 
-  const std::vector<std::unique_ptr<ICommand>>& GetCommands() const;
+  [[nodiscard]] const std::vector<std::unique_ptr<ICommand>>& GetCommands() const;
+  size_t GetCurrentCmdIdx() const;
+  bool IsExecuting() const;
 };

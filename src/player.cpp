@@ -67,3 +67,9 @@ Player::Player(Animation* anim_run, Animation* anim_idle, Animation* anim_jump, 
 const std::vector<std::unique_ptr<ICommand>>& Player::GetCommands() const {
   return commands;
 }
+size_t Player::GetCurrentCmdIdx() const {
+  return current_cmd_idx;
+}
+bool Player::IsExecuting() const {
+  return execute;
+}

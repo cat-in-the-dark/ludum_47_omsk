@@ -19,7 +19,7 @@ constexpr int UI_RESOURCES_Y = HEIGHT - TILE_HEIGHT * 8;
 constexpr int SMALL_FONT = 20;
 constexpr int BIG_FONT = 22;
 
-
+constexpr Color COLOR_3 = Color {95, 44, 131, 255};
 constexpr Color COLOR_9 = Color{246, 219, 186 , 255};
 constexpr Color COLOR_15 = Color{39, 24, 84 , 255};
 
