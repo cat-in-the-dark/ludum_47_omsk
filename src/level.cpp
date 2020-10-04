@@ -55,6 +55,8 @@ void Level::Update() {
   auto collision = CheckCollisionRecs(pobbxo, plbbox);
   if (collision) {
     parent_->SetWin();
+    parent_->GetPlayer()->x = portal_->x;
+    parent_->GetPlayer()->y = portal_->y;
   }
 }
 Level::~Level() = default;
@@ -63,4 +65,7 @@ void Level::SetPortal(Portal* portal) {
 }
 void Level::SetParent(SceneGame* parent) {
   parent_ = parent;
+}
+Portal* Level::GetPortal() {
+  return portal_.get();
 }

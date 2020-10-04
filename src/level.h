@@ -21,6 +21,7 @@ class Level {
   [[nodiscard]] Tile* Get(int x, int y) const;
   void Put(Tile* tile);
   void SetPortal(Portal* portal);
+  Portal* GetPortal();
   void Draw();
   void Update();
   void SetParent(SceneGame* parent);

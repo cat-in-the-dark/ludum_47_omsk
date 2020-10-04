@@ -22,7 +22,7 @@ Level* Level1(Assets* assets) {
                             std::get<2>(el)));
   }
 
-  level->SetPortal(new Portal(&(assets->portal_anim), BIG_TILE_WIDTH, HEIGHT,
+  level->SetPortal(new Portal(&(assets->portal_anim), BIG_TILE_WIDTH, HEIGHT-BIG_TILE_HEIGHT*3,
                               BIG_TILE_WIDTH, BIG_TILE_HEIGHT));
 
   return level;
