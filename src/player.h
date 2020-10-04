@@ -43,5 +43,7 @@ class Player {
   void Draw();
   void Update();
 
-  float GetMiddleX() const;
+  [[nodiscard]] float GetMiddleX() const;
+
+  const std::vector<std::unique_ptr<ICommand>>& GetCommands() const;
 };

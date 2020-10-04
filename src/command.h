@@ -1,10 +1,13 @@
 #pragma once
 
+#include <string>
+
 class Player;
 
 class ICommand {
  public:
   virtual bool Apply() = 0;
+  virtual std::string GetName() const = 0;
   virtual ~ICommand() = default;
 };
 
@@ -15,6 +18,9 @@ class LeftCommand : public ICommand {
  public:
   explicit LeftCommand(Player* player);
   bool Apply() override;
+  std::string GetName() const override {
+    return "MOV LEFT";
+  }
 };
 
 class RightCommand : public ICommand {
@@ -24,6 +30,9 @@ class RightCommand : public ICommand {
  public:
   explicit RightCommand(Player* player);
   bool Apply() override;
+  std::string GetName() const override {
+    return "MOV RIGHT";
+  }
 };
 
 class JumpCommand : public ICommand {
@@ -31,6 +40,9 @@ class JumpCommand : public ICommand {
  public:
   explicit JumpCommand(Player* player);
   bool Apply() override;
+  std::string GetName() const override {
+    return "CALL JUMP";
+  }
 };
 class JumpLeftCommand: public ICommand {
   JumpCommand jump;
@@ -40,6 +52,9 @@ class JumpLeftCommand: public ICommand {
  public:
   explicit JumpLeftCommand(Player* player);
   bool Apply() override;
+  std::string GetName() const override {
+    return "CALL JUMP_LEFT";
+  }
 };
 class JumpRightCommand: public ICommand {
   JumpCommand jump;
@@ -49,4 +64,7 @@ class JumpRightCommand: public ICommand {
  public:
   explicit JumpRightCommand(Player* player);
   bool Apply() override;
+  std::string GetName() const override {
+    return "CALL JUMP_RIGHT";
+  }
 };

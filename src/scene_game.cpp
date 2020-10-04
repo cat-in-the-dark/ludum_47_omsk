@@ -4,6 +4,7 @@
 #include "level.h"
 #include "player.h"
 #include "tile.h"
+#include "ui.h"
 
 void ApplyGravity(Player* player, Level* level) {
   if (!player->isGrounded) {
@@ -32,12 +33,19 @@ bool SceneGame::Update() {
   ApplyGravity(player.get(), level.get());
   level->Update();
   player->Update();
+  ui->Update();
   return false;
 }
 void SceneGame::Draw() {
   DrawTexture(GetContext()->assets->fon_10, 0, 0, WHITE);
   level->Draw();
   player->Draw();
+  ui->Draw();
 }
-SceneGame::SceneGame(Player* player, Level* level)
-    : player(std::unique_ptr<Player>(player)), level(std::unique_ptr<Level>(level)) {}
+SceneGame::SceneGame(Player* player, Level* level, UI* ui)
+    : player(std::unique_ptr<Player>(player)), level(std::unique_ptr<Level>(level)), ui(std::unique_ptr<UI>(ui)) {
+  ui->SetParent(this);
+}
+Player* SceneGame::GetPlayer() {
+  return player.get();
+}

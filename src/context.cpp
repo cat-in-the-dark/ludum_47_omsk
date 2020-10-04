@@ -7,6 +7,7 @@
 #include "player.h"
 #include "scene_game.h"
 #include "scene_logo.h"
+#include "ui.h"
 
 Context::Context() {
   SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
@@ -18,9 +19,13 @@ Context::Context() {
 
   scene_manager.Register<SceneLogo>();
 
+  auto* ui = new UI(UI_WIDTH, UI_HEIGHT, WIDTH - UI_WIDTH, 0);
+
   {
-    scene_manager.Register<SceneGame>(new Player(&(assets->player_run_anim), &(assets->player_idle_anim), &(assets->player_jump_anim), 0.0f, ToFloat(HEIGHT)),
-                                      Level1(assets.get()));
+    scene_manager.Register<SceneGame>(
+        new Player(&(assets->player_run_anim), &(assets->player_idle_anim),
+                   &(assets->player_jump_anim), 0.0f, ToFloat(HEIGHT)),
+        Level1(assets.get()), ui);
   }
 }
 Context::~Context() {

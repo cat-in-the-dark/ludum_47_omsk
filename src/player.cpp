@@ -64,3 +64,6 @@ float Player::GetMiddleX() const {
 }
 Player::Player(Animation* anim_run, Animation* anim_idle, Animation* anim_jump, float x, float y)
     : anim_run(anim_run), anim_idle(anim_idle), anim_jump(anim_jump), x(x), y(y) {}
+const std::vector<std::unique_ptr<ICommand>>& Player::GetCommands() const {
+  return commands;
+}
